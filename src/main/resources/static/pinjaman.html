@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinjaman Table</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pinjaman Table</h1>
+    <table id="pinjamanTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Mahasiswa ID</th>
+                <th>Buku ID</th>
+                <th>Tgl Pinjam</th>
+                <th>Tgl Batasan Pengembalian</th>
+                <th>Tgl Pengembalian</th>
+                <th>Denda</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        async function fetchPinjamanData() {
+            const response = await fetch('/api/pinjaman');
+            const pinjamanList = await response.json();
+
+            const tableBody = document.querySelector('#pinjamanTable tbody');
+            tableBody.innerHTML = '';
+
+            pinjamanList.forEach(pinjaman => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${pinjaman.id}</td>
+                    <td>${pinjaman.mahasiswaId}</td>
+                    <td>${pinjaman.bukuId}</td>
+                    <td>${pinjaman.tglPinjam}</td>
+                    <td>${pinjaman.tglBatasanPengembalian}</td>
+                    <td>${pinjaman.tglPengembalian || ''}</td>
+                    <td>${pinjaman.denda || ''}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        fetchPinjamanData();
+    </script>
+</body>
+</html>

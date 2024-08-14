@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package com.example.internLEN;
+
+service BukuService {
+    rpc AddBuku (AddBukuRequest) returns (BukuResponse);
+    rpc GetBuku (BukuIdRequest) returns (BukuResponse);
+    rpc UpdateBuku (UpdateBukuRequest) returns (BukuResponse);
+    rpc DeleteBuku (BukuIdRequest) returns (EmptyResponse);
+}
+
+message AddBukuRequest { 
+    string title = 1;
+    string penulis = 2;
+    int32 kuantitas = 3;
+    string tempatPenyimpanan = 4;
+}
+
+message UpdateBukuRequest{
+    int64 id = 1;
+    string title = 2;
+    string penulis = 3;
+    int32 kuantitas = 4;
+    string tempatPenyimpanan = 5;
+}
+
+message BukuResponse {
+    int64 id = 1;
+    string title = 2;
+    string penulis = 3;
+    int32 kuantitas = 4;
+    string tempatPenyimpanan = 5;
+}
+
+message BukuIdRequest {
+    string id = 1;
+}
+
+message EmptyResponse {
+    bool success = 1;
+}

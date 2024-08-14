@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+      - "9090:9090"
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: internlen
+      DB_USER: postgres
+      DB_PASSWORD: android24
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: internlen
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: android24
+    ports:
+      - "5432:5432"

@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package com.example.internLEN;
+
+service MahasiswaService {
+    rpc AddMahasiswa (AddMahasiswaRequest) returns (MahasiswaResponse);
+    rpc GetMahasiswa (MahasiswaIdRequest) returns (MahasiswaResponse);
+    rpc UpdateMahasiswa (UpdateMahasiswaRequest) returns (MahasiswaResponse);
+    rpc DeleteMahasiswa (MahasiswaIdRequest) returns (EmptyResponseMhs);
+}
+
+message AddMahasiswaRequest {
+    string nama = 1;
+    string nim = 2;
+    string jurusan = 3;
+}
+
+message UpdateMahasiswaRequest {
+    int64 id = 1; 
+    string nama = 2;
+    string nim = 3;
+    string jurusan = 4;
+}
+
+message MahasiswaResponse {
+    int64 id = 1;
+    string nama = 2;
+    string nim = 3;
+    string jurusan = 4;
+}
+
+message MahasiswaIdRequest {
+    string id = 1;
+}
+
+message EmptyResponseMhs {
+    bool success = 1;
+}

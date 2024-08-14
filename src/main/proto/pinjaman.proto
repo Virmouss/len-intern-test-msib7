@@ -1,0 +1,61 @@
+syntax = "proto3";
+
+package com.example.internLEN;
+
+service PinjamanService {
+    rpc AddPinjaman(AddPinjamanRequest) returns (PinjamanResponse);
+    rpc GetPinjaman(PinjamanIdRequest) returns (PinjamanResponse);
+    rpc UpdatePinjaman(UpdatePinjamanRequest) returns (EmptyResponsePinjam);
+    rpc DeletePinjaman(PinjamanIdRequest) returns (EmptyResponsePinjam);
+    rpc ListPinjaman(EmptyRequest) returns (PinjamanListResponse);
+    rpc CalculateDenda(CalculateDendaRequest) returns (DendaResponse);
+}
+
+message AddPinjamanRequest {
+    int64 mahasiswaId = 1;
+    int64 bukuId = 2;
+    string tglPinjam = 3;
+    string tglBatasanPengembalian = 4;
+}
+
+message UpdatePinjamanRequest {
+    int64 id = 1;
+    int64 mahasiswaId = 2;
+    int64 bukuId = 3;
+    string tglPinjam = 4;
+    string tglBatasanPengembalian = 5;
+    string tglPengembalian = 6;
+    string denda = 7;
+}
+
+message PinjamanResponse {
+    int64 id = 1;
+    int64 mahasiswaId = 2;
+    int64 bukuId = 3;
+    string tglPinjam = 4;
+    string tglBatasanPengembalian = 5;
+    string tglPengembalian = 6;
+    string denda = 7;
+}
+
+message PinjamanIdRequest {
+    int64 id = 1;
+}
+
+message EmptyRequest {}
+
+message PinjamanListResponse {
+    repeated PinjamanResponse pinjaman = 1;
+}
+
+message CalculateDendaRequest {
+    int64 pinjamanId = 1;
+}
+
+message DendaResponse {
+    string denda = 1;
+}
+
+message EmptyResponsePinjam {
+    bool success = 1;
+}
